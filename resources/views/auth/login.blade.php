@@ -1,14 +1,15 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="row h-100 w-100" style="justify-content:center;display:flex" id="login-box">
+
+<div class="row h-100 w-100" style="justify-content:center;display:flex; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background-color: #e6e6e6;" id="login-box">
     <div class="col-md-5">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background-color: #e6e6e6;">
             <div class="panel-heading"></div>
             <div class="panel-body">
                 @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> @lang('quickadmin.qa_there_were_problems_with_input'):
+                    <strong>Oops!</strong> @lang('quickadmin.qa_there_were_problems_with_input')
                     <br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -55,7 +56,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <label>
@@ -66,16 +66,11 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit"
-                                    class="btn btn-primary"
-                                    style="margin-right: 15px;">
-                                @lang('quickadmin.qa_login')
-                            </button>
-                        </div>
+                    <div class="col-md-6 col-md-offset-4" style="text-align: right;">
+                        <button type="submit" style="margin-right: 15px;">OK</button>
+                        <button type="button" style="margin-right: 15px;">Cancel</button>
                     </div>
-
-                    
+                </div>
 
                 </form>
             </div>
