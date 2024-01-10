@@ -23,4 +23,5 @@ class DownloadsController extends Controller
 
         return Response::download($pathToFile);
     }
+
 }
