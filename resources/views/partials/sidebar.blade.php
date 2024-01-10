@@ -15,7 +15,7 @@
             </li>
 
             
-            @can('user_management_access')
+            <!-- @can('user_management_access')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
@@ -36,7 +36,11 @@
                         </a>
                     </li>
                 @endcan
-                @can('user_access')
+               
+                </ul>
+            </li>
+            @endcan -->
+            @can('user_access')
                 <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.users.index') }}">
                             <i class="fa fa-user"></i>
@@ -46,9 +50,6 @@
                         </a>
                     </li>
                 @endcan
-                </ul>
-            </li>
-            @endcan
             @can('folder_access')
             <li class="{{ $request->segment(2) == 'folders' ? 'active' : '' }}">
                 <a href="{{ route('admin.folders.index') }}">

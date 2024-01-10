@@ -4,7 +4,7 @@
 <div class="row h-100 w-100" style="justify-content:center;display:flex" id="login-box">
     <div class="col-md-5">
         <div class="panel panel-default">
-            <div class="panel-heading">{{ ucfirst(config('app.name')) }} @lang('quickadmin.qa_login')</div>
+            <div class="panel-heading"></div>
             <div class="panel-body">
                 @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -49,9 +49,9 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <a href="{{ route('auth.password.reset') }}">@lang('quickadmin.qa_forgot_password')</a>
+                            <a href="#">@lang('quickadmin.qa_forgot_password')</a>
                             <br>
-                            <a href="{{ route('auth.register') }}">@lang('quickadmin.qa_registration')</a>
+                            <a href="#">@lang('quickadmin.qa_registration')</a>
                         </div>
                     </div>
 
