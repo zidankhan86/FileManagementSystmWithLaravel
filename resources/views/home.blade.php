@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="row">
+        @if (Auth::check() && Auth::user()->role_id == 1)
+
         <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang('quickadmin.qa_dashboard')</div>
@@ -11,5 +13,16 @@
                 </div>
             </div>
         </div>
+        @elseif (Auth::check() && Auth::user()->role_id == 2)
+
+        <div class="col-md-12">
+          
+
+
+            
+        </div>
+
+        @endif
+
     </div>
 @endsection

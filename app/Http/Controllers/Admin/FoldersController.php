@@ -73,12 +73,22 @@ class FoldersController extends Controller
         if (! Gate::allows('folder_create')) {
             return abort(401);
         }
-        $folder = Folder::create($request->all());
-
-
-
+    
+        // Create a new instance of Folder
+        $folder = new Folder;
+    
+        // Assign all request data to the folder
+        $folder->fill($request->all());
+    
+        // Assign the 'created_by_id' from the 'user_id' in the request
+        $folder->created_by_id = $request->user_id;
+    
+        // Save the folder to the database
+        $folder->save();
+    
         return redirect()->route('admin.folders.index');
     }
+    
 
 
     /**
