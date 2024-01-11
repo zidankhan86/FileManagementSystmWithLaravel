@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Request;
 use App\File;
 use App\Folder;
-use Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreFoldersRequest;
-use App\Http\Requests\Admin\UpdateFoldersRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as NRequest;
+use App\Http\Requests\Admin\StoreFoldersRequest;
+use App\Http\Requests\Admin\UpdateFoldersRequest;
 
 
 class FoldersController extends Controller
@@ -23,7 +24,7 @@ class FoldersController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('folder_access')) {
+        if (!Gate::allows('folder_access')) {
             return abort(401);
         }
         if ($filterBy = Request::get('filter')) {
@@ -35,7 +36,7 @@ class FoldersController extends Controller
         }
 
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('folder_delete')) {
+            if (!Gate::allows('folder_delete')) {
                 return abort(401);
             }
             $folders = Folder::onlyTrashed()->get();
@@ -53,10 +54,10 @@ class FoldersController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('folder_create')) {
+        if (!Gate::allows('folder_create')) {
             return abort(401);
         }
-        
+
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
         return view('admin.folders.create', compact('created_bies'));
@@ -70,25 +71,26 @@ class FoldersController extends Controller
      */
     public function store(StoreFoldersRequest $request)
     {
-        if (! Gate::allows('folder_create')) {
+        if (!Gate::allows('folder_create')) {
             return abort(401);
         }
-    
-        // Create a new instance of Folder
-        $folder = new Folder;
-    
-        // Assign all request data to the folder
-        $folder->fill($request->all());
-    
-        // Assign the 'created_by_id' from the 'user_id' in the request
-        $folder->created_by_id = $request->user_id;
-    
-        // Save the folder to the database
-        $folder->save();
-    
+
+        // // Create a new instance of Folder
+        // $folder = new Folder;
+        // $folder->name = $request->name;
+        // $folder->created_by_id = $request->user_id;
+        // $folder->save();
+        DB::table('folders')->insert([
+            'name' => $request->name,
+            'created_by_id' => $request->user_id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+
         return redirect()->route('admin.folders.index');
     }
-    
+
 
 
     /**
@@ -99,10 +101,10 @@ class FoldersController extends Controller
      */
     public function edit($id)
     {
-        if (! Gate::allows('folder_edit')) {
+        if (!Gate::allows('folder_edit')) {
             return abort(401);
         }
-        
+
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
         $folder = Folder::findOrFail($id);
@@ -119,7 +121,7 @@ class FoldersController extends Controller
      */
     public function update(UpdateFoldersRequest $request, $id)
     {
-        if (! Gate::allows('folder_edit')) {
+        if (!Gate::allows('folder_edit')) {
             return abort(401);
         }
         $folder = Folder::findOrFail($id);
@@ -139,11 +141,12 @@ class FoldersController extends Controller
      */
     public function show($id)
     {
-        if (! Gate::allows('folder_view')) {
+        if (!Gate::allows('folder_view')) {
             return abort(401);
         }
-        
-        $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');$files = \App\File::where('folder_id', $id)->get();
+
+        $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $files = \App\File::where('folder_id', $id)->get();
 
         $folder = Folder::findOrFail($id);
         $userFilesCount = File::where('created_by_id', Auth::getUser()->id)->count();
@@ -160,7 +163,7 @@ class FoldersController extends Controller
      */
     public function destroy($id)
     {
-        if (! Gate::allows('folder_delete')) {
+        if (!Gate::allows('folder_delete')) {
             return abort(401);
         }
         $folder = Folder::findOrFail($id);
@@ -176,7 +179,7 @@ class FoldersController extends Controller
      */
     public function massDestroy(NRequest $request)
     {
-        if (! Gate::allows('folder_delete')) {
+        if (!Gate::allows('folder_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -197,7 +200,7 @@ class FoldersController extends Controller
      */
     public function restore($id)
     {
-        if (! Gate::allows('folder_delete')) {
+        if (!Gate::allows('folder_delete')) {
             return abort(401);
         }
         $folder = Folder::onlyTrashed()->findOrFail($id);
@@ -214,7 +217,7 @@ class FoldersController extends Controller
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('folder_delete')) {
+        if (!Gate::allows('folder_delete')) {
             return abort(401);
         }
         $folder = Folder::onlyTrashed()->findOrFail($id);

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\File;
 use Request;
-use Illuminate\Http\Request as NRequest;
+use App\File;
+use App\Folder;
+use Faker\Provider\Uuid;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request as NRequest;
 use App\Http\Requests\Admin\StoreFilesRequest;
 use App\Http\Requests\Admin\UpdateFilesRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
-use Illuminate\Support\Facades\Session;
-use Faker\Provider\Uuid;
 
 class FilesController extends Controller
 {
@@ -91,14 +93,17 @@ class FilesController extends Controller
             $fileIds = $request->input('filename_id');
 
             foreach ($fileIds as $fileId) {
-                $file = File::create([
+                $folderId = $request->input('folder_id');
+                $createdById = DB::table('folders')->where('id', $folderId)->value('created_by_id');
+            
+                DB::table('files')->insert([
                     'id' => $fileId,
-                    'uuid' => (string)\Webpatser\Uuid\Uuid::generate(),
-                    'folder_id' => $request->input('folder_id'),
-                    'created_by_id' => Auth::getUser()->id
-
+                    'uuid' => (string) \Webpatser\Uuid\Uuid::generate(),
+                    'folder_id' => $folderId,
+                    'created_by_id' => $createdById
                 ]);
             }
+            
 
             foreach ($request->input('filename_id', []) as $index => $id) {
                 $model = config('media-library.media_model');
