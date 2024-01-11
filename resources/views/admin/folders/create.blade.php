@@ -20,6 +20,10 @@
                             {{ $errors->first('name') }}
                         </p>
                     @endif
+                    {!! Form::label('user_id', 'User Name *', ['class' => 'control-label']) !!}
+
+                    {!! Form::select('user_id', \App\User::pluck('name', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select User', 'required' => 'required']) !!}
+
                 </div>
             </div>
             

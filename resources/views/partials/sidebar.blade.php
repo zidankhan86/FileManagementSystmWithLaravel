@@ -5,7 +5,8 @@
     <section class="sidebar">
         <ul class="sidebar-menu">
 
-             
+            @if (Auth::check() && Auth::user()->role_id == 1)
+                 
 
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">
@@ -84,6 +85,8 @@
                     <span class="title">@lang('quickadmin.qa_change_password')</span>
                 </a>
             </li>
+            @endif
+
 
             <li>
                 <a href="#logout" onclick="$('#logout').submit();">
