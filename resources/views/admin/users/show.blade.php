@@ -44,7 +44,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('quickadmin.folders.fields.name')</th>
-                                <th>Created At</th>
+                                <th>@lang('quickadmin.folders.fields.created-by')</th>
                                 @if (request('show_deleted') == 1)
                                     <th>&nbsp;</th>
                                 @else
@@ -57,8 +57,9 @@
                             @if (count($folders) > 0)
                                 @foreach ($folders as $folder)
                                     <tr data-entry-id="{{ $folder->id }}">
-                                        <td field-key='name'>{{ $folder->name }}</td>
-                                        <td field-key='created_by'>{{ $folder->created_at }}</td>
+                                        <td field-key='name'> <a href="{{ route('admin.folders.show',[$folder->id]) }}">{{$folder->name}}</a></td>
+                                        
+                                        <td field-key='created_by'>{{ $folder->created_by->name or '' }}</td>
                                         @if (request('show_deleted') == 1)
                                             <td>
                                                 @can('delete')
@@ -132,6 +133,8 @@
                             @if (count($files) > 0)
                                 @foreach ($files as $file)
                                     <tr data-entry-id="{{ $file->id }}">
+
+                                        
                                         <td field-key='folder'>{{ $file->folder->name or '' }}</td>
                                         <td field-key='created_by'>{{ $file->created_by->name or '' }}</td>
                                         <td field-key='filename'>
@@ -197,6 +200,19 @@
                 </div>
             </div>
 
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             <p>&nbsp;</p>
 
             <a href="{{ route('admin.users.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
