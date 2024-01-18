@@ -13,11 +13,6 @@
                 </div>
             </div>
         </div>
-        @elseif (Auth::check() && Auth::user()->role_id == 2)
-
-        <div class="col-md-12">
-
-        </div>
 
         @endif
 
