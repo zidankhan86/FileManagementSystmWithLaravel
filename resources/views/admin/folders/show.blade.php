@@ -52,8 +52,11 @@
                                 @endcan
                                 <td field-key='filename'>
                                     @foreach ($file->getMedia('filename') as $media)
+                                    @php
+                                    $urlToFile = asset('storage/' . $file->id . '/' . $media->file_name);
+                                @endphp
                                         <p class="form-group">
-                                            <a href="{{ url('/admin/' . $file->uuid . '/download') }}"
+                                            <a href="{{ $urlToFile }}"
                                                 target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
                                         </p>
                                     @endforeach
