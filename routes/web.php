@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/', function () { return redirect('/admin/home'); });
-
 // Authentication Routes...
 $this->router->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 $this->router->post('login', 'Auth\LoginController@login')->name('auth.login');
@@ -22,8 +21,8 @@ $this->router->get('register', 'Auth\RegisterController@showRegistrationForm')->
 $this->router->post('register', 'Auth\RegisterController@register')->name('auth.register');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/home', 'HomeController@index');
-
+    Route::get('/home', 'HomeController@customerHome');
+    Route::get('/customer/home', 'HomeController@index');
     Route::resource('subscriptions', 'Admin\SubscriptionsController');
     Route::resource('payments', 'Admin\PaymentsController');
     Route::resource('roles', 'Admin\RolesController');
