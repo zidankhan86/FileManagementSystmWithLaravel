@@ -94,13 +94,6 @@
                     <span class="title">@lang('quickadmin.qa_logout')</span>
                 </a>
             </li>
-
-            <li>
-                <a href="{{url('customer/home')}}">
-                    <i class="fa fa-arrow-left"></i>
-                    <span class="title">test</span>
-                </a>
-            </li>
         </ul>
     </section>
 </aside>
