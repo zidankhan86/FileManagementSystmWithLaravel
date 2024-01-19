@@ -160,8 +160,8 @@
                         <div class="row justify-content-center"> <!-- Center the content within the row -->
                                 <div class="panel panel-default">
                                     <div class="panel-body text-center"> <!-- Center the content within the panel -->
-                                        <img src="{{ Auth::check() && Auth::user()->image ? url('storage/'.Auth::user()->image) : url('path/to/default/image.jpg') }}" alt="Preview Image" style="max-width: 100%; max-height: 1080px; margin: auto;" id="file-preview-img">
-                                        <embed src="" type="" width="100%" height="1080px" id="file-preview-embed"></embed>
+                                        <img src="{{ Auth::check() && Auth::user()->image ? url('storage/'.Auth::user()->image) : url('path/to/default/image.jpg') }}" alt="Preview Image" style="max-width: 100%; max-height: 100%; margin: auto;" id="file-preview-img">
+                                        <embed src="" type="" width="100%" height="100%" id="file-preview-embed"></embed>
                                         <p id="preview-message" style="display: none;">Nothing to preview</p>
                                     </div>
                                 </div>
