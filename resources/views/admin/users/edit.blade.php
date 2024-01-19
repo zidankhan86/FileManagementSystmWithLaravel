@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="page-title">@lang('quickadmin.users.title')</h3>
     
-    {!! Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id]]) !!}
+    {!! Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id],'files' => true]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -11,6 +11,29 @@
         </div>
 
         <div class="panel-body">
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
+                    
+                    @if(isset($model) && $model->image)
+                        <img src="{{ asset($model->image) }}" alt="Current Image" style="max-width: 100%;">
+                        <p class="help-block">Current Image</p>
+                    @endif
+                    
+                    {!! Form::file('image', ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    
+                    @if($errors->has('image'))
+                        <p class="help-block">
+                            {{ $errors->first('image') }}
+                        </p>
+                    @endif
+                </div>
+                
+
+
+            </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('name', trans('quickadmin.users.fields.name').'*', ['class' => 'control-label']) !!}

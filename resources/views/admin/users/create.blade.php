@@ -2,7 +2,7 @@
 
 @section('content')
     <h3 class="page-title">@lang('quickadmin.users.title')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.users.store']]) !!}
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.users.store'], 'files' => true]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -11,16 +11,17 @@
         
         <div class="panel-body">
         <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
-                    {!! Form::file('image', old('image'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('name'))
-                        <p class="help-block">
-                            {{ $errors->first('name') }}
-                        </p>
-                    @endif
-                </div>
+            <div class="col-xs-12 form-group">
+                {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
+                {!! Form::file('image', old('image'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                <p class="help-block"></p>
+                @if($errors->has('image'))
+                    <p class="help-block">
+                        {{ $errors->first('image') }}
+                    </p>
+                @endif
+            </div>
+            
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
 
@@ -50,17 +51,39 @@ class UsersController extends Controller
      * @param  \App\Http\Requests\StoreUsersRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUsersRequest $request)
+
+
+
+     public function store(StoreUsersRequest $request)
     {
-        if (! Gate::allows('user_create')) {
-            return abort(401);
-        }
-        $user = User::create($request->all());
-
-
-
-        return redirect()->route('admin.users.index');
+    if (!Gate::allows('user_create')) {
+        return abort(401);
     }
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = $image->hashName();
+
+        // Use the storage facade to store the image with a hashed name
+        $path = $image->storeAs('public/images', $imageName);
+
+        // Update the request with the correct image path
+        $request->merge(['image' => $path]);
+    }
+    // Assuming you have an 'image' column in your users table
+    $user = User::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => bcrypt($request->input('password')),
+        'image' =>   'images/'.$imageName,
+        'role_id' => $request->input('role_id'),
+
+    ]);
+
+    return redirect()->route('admin.users.index');
+    }
+
+
 
 
     /**
@@ -94,13 +117,33 @@ class UsersController extends Controller
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
+    
         $user = User::findOrFail($id);
-        $user->update($request->all());
-
-
-
+    
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->hashName();
+    
+            // Use the storage facade to store the image with a hashed name
+            $path = $image->storeAs('public/images', $imageName);
+    
+            // Update the request with the correct image path
+            $request->merge(['image' => 'images/'.$imageName]);
+    
+            // Delete the previous image if it exists
+            Storage::delete($user->image);
+        }
+    
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'image' => $request->input('image', $user->image), // Use the new image path or the existing one
+            'role_id' => $request->input('role_id'),
+        ]);
+    
         return redirect()->route('admin.users.index');
-    }
+    }    
 
 
     /**
@@ -129,16 +172,29 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        if (! Gate::allows('user_delete')) {
-            return abort(401);
-        }
-        $user = User::findOrFail($id);
-        $user->delete();
 
-        return redirect()->route('admin.users.index');
+public function destroy($id)
+{
+    if (!Gate::allows('user_delete')) {
+        return abort(401);
     }
+
+    $user = User::findOrFail($id);
+
+    // Delete the associated image if it exists
+    if (!is_null($user->image)) {
+        // Extract the filename from the image path
+        $filename = basename($user->image);
+
+        // Delete the image file from storage
+        Storage::delete('public/images/' . $filename);
+    }
+
+    // Delete the user record from the database
+    $user->delete();
+
+    return redirect()->route('admin.users.index');
+}
 
     /**
      * Delete all selected User at once.
