@@ -10,6 +10,18 @@
         </div>
         
         <div class="panel-body">
+        <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
+                    {!! Form::file('image', old('image'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('name'))
+                        <p class="help-block">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('name', trans('quickadmin.users.fields.name').'*', ['class' => 'control-label']) !!}
