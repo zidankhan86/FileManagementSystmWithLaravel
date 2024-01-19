@@ -78,8 +78,7 @@
                                         <td field-key='filename'>
                                             @foreach ($file->getMedia('filename') as $media)
                                                 <p class="form-group">
-                                                    <a href="{{ url('/admin/' . $file->uuid . '/download') }}"
-                                                        target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
+                                                    {{ $media->name }} ({{ $media->size }} KB)
                                                 </p>
                                             @endforeach
                                         </td>
@@ -167,11 +166,8 @@
         <div class="col-md-8">
 
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Preview
-            </div>
-            <embed src="" type="" width="100%" height="700px" id="file-preview"></embed>
-            <p id="preview-message" style="display: none;">Nothing to preview</p>
+            <img src="" alt="Preview Image" style="max-width: 100%; max-height: 1080px; display: none; margin: auto;" id="file-preview-img">
+            <embed src="" type="" width="100%" height="1080px" id="file-preview-embed"></embed>            <p id="preview-message" style="display: none;">Nothing to preview</p>
         </div>
         </div>
 
@@ -197,14 +193,36 @@
 
             var fileUrl = $(this).data('src');
             if (fileUrl) {
-                $('#file-preview').attr('src', fileUrl);
+                var fileExtension = getFileExtension(fileUrl);
+
+                if (isImage(fileExtension)) {
+                    // It's an image, use <img>
+                    $('#file-preview-img').attr('src', fileUrl).show(); // Show the image
+                    $('#file-preview-embed').attr('src', ''); // Reset the src attribute for embed
+                } else {
+                    // It's not an image, use <embed>
+                    $('#file-preview-embed').attr('src', fileUrl);
+                    $('#file-preview-img').hide(); // Hide the image
+                }
+
                 $('#preview-message').hide();
             } else {
                 // No file selected, show the message
-                $('#file-preview').attr('src', ''); // Reset the src attribute
+                $('#file-preview-img').attr('src', '').hide(); // Reset the src attribute and hide the image
+                $('#file-preview-embed').attr('src', ''); // Reset the src attribute for embed
                 $('#preview-message').show();
             }
         });
+
+        // Helper function to get file extension
+        function getFileExtension(filename) {
+            return filename.split('.').pop().toLowerCase();
+        }
+
+        // Helper function to check if the file is an image
+        function isImage(extension) {
+            return ['jpg', 'jpeg', 'png', 'gif'].includes(extension);
+        }
     });
 </script>
     
