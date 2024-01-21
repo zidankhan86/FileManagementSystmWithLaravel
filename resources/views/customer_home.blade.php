@@ -102,7 +102,7 @@
                                         <li class="">
                                             <a href="#">
                                                 <i class="fa fa-folder"></i>
-                                                <span class="title"> Empty Folder</span>
+                                                <span class="title"> No Data</span>
                                             </a>
                                         </li>
                                     @else
