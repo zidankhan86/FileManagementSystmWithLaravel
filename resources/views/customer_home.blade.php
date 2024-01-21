@@ -12,7 +12,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=20, user-scalable=yes" name="viewport">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Ionicons -->
