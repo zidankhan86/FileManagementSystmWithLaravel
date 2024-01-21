@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('folder_id', trans('quickadmin.files.fields.folder').'*', ['class' => 'control-label']) !!}
-                    {!! Form::select('folder_id', $folders, old('folder_id'), ['class' => 'form-control select2', 'required' => '']) !!}
+                    {!! Form::select('folder_id', $folders, null, ['class' => 'form-control select2', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('folder_id'))
                         <p class="help-block">

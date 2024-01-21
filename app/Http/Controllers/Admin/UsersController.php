@@ -55,33 +55,37 @@ class UsersController extends Controller
 
 
      public function store(StoreUsersRequest $request)
-    {
-    if (!Gate::allows('user_create')) {
-        return abort(401);
-    }
-
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = $image->hashName();
-
-        // Use the storage facade to store the image with a hashed name
-        $path = $image->storeAs('public/images', $imageName);
-
-        // Update the request with the correct image path
-        $request->merge(['image' => $path]);
-    }
-    // Assuming you have an 'image' column in your users table
-    $user = User::create([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'password' => bcrypt($request->input('password')),
-        'image' =>   'images/'.$imageName,
-        'role_id' => $request->input('role_id'),
-
-    ]);
-
-    return redirect()->route('admin.users.index');
-    }
+     {
+         if (!Gate::allows('user_create')) {
+             return abort(401);
+         }
+     
+         // Initialize $imageName with a default value (empty string)
+         $imageName = '';
+     
+         if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $imageName = $image->hashName();
+     
+             // Use the storage facade to store the image with a hashed name
+             $path = $image->storeAs('public/images', $imageName);
+     
+             // Update the request with the correct image path
+             $request->merge(['image' => $path]);
+         }
+     
+         // Assuming you have an 'image' column in your users table
+         $user = User::create([
+             'name' => $request->input('name'),
+             'email' => $request->input('email'),
+             'password' => bcrypt($request->input('password')),
+             'image' => $imageName ? 'images/'.$imageName : null, // Check if $imageName is not empty
+             'role_id' => $request->input('role_id'),
+         ]);
+     
+         return redirect()->route('admin.users.index');
+     }
+     
 
 
 

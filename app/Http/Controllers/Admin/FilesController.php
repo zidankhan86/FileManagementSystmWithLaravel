@@ -69,7 +69,13 @@ class FilesController extends Controller
             return redirect('/admin/files');
         }
 
-        $folders = \App\Folder::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $folders = \App\Folder::with('created_by')->get()->map(function ($folder) {
+            return [
+                'id' => $folder->id,
+                'name_with_user' => $folder->name . ' - ' . $folder->created_by->name,
+            ];
+        })->pluck('name_with_user', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        
         $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
 
         return view('admin.files.create', compact('folders', 'created_bies', 'userFilesCount', 'roleId'));

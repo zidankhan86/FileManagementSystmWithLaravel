@@ -29,13 +29,18 @@ class Folder extends Model
         $this->attributes['created_by_id'] = $input ? $input : null;
     }
     
+
+    public function files()
+    {
+        return $this->hasMany(User::class, 'folder_id');
+    }
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }
-    public function files()
+    public function getNameWithUserAttribute()
     {
-        return $this->hasMany(User::class, 'folder_id');
+        return $this->name . ' - ' . $this->created_by->name;
     }
     
 }
