@@ -68,7 +68,7 @@
                         <tbody>
 
                             @if (count($files) > 0)
-                                @foreach ($files as $file)
+                                @foreach ($files->reverse() as $file)
                                     <tr data-entry-id="{{ $file->id }}">
                                         @can('file_delete')
                                             @if (request('show_deleted') != 1)
