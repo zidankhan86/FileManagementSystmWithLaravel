@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        @lang('quickadmin.quickadmin_title')
+        login
     </title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
         <header class="main-header">
             <!-- Logo -->
             {{-- <a href="{{ url('/admin/home') }}" class="logo" style="font-size: 16px;">
-                <span class="logo-mini">
+                <span class="logo-mini" style="color: black;">
                     @lang('quickadmin.quickadmin_title')</span>
                 <span class="logo-lg">
                     @lang('quickadmin.quickadmin_title')</span>
@@ -80,14 +80,14 @@
 
                     @if (Auth::check() && Auth::user()->role_id == 2)
                         <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
-                            <a href="{{ url('/') }}">
+                            <a href="{{ url('/') }}" style="color: black;">
                                 <i class="fa fa-home"></i>
-                                <span class="title">Home</span>
+                                <span class="title" style="color: black;">Home</span>
                             </a>
                         </li>
                         @foreach ($folders as $folder)
                             <li class="treeview">
-                                <a href="#">
+                                <a href="#" style="color: black;">
                                     <i class="fa fa-folder"></i>
                                     <span class="title"> {{ $folder->name }}</span>
                                     <span class="pull-right-container">
@@ -100,7 +100,7 @@
                                     @endphp
                                     @if ($files->isEmpty())
                                         <li class="">
-                                            <a href="#">
+                                            <a href="#" style="color: black;">
                                                 <i class="fa fa-folder"></i>
                                                 <span class="title"> No Data</span>
                                             </a>
@@ -108,14 +108,14 @@
                                     @else
                                     @foreach ($files as $file)
                                     <li class="">
-                                        <a href="#">
+                                        <a href="#" style="color: black;">
                                             <span class="title">
                                                 @foreach ($file->getMedia('filename') as $media)
                                                     @php
                                                         $urlToFile = asset('storage/' . $file->id . '/' . $media->file_name);
                                                     @endphp
                                                     {{-- <a href="{{ $urlToFile }}" class="btn btn-xs btn-success">View</a> --}}
-                                                    <a href="{{ $urlToFile }}"  class="view-file-btn" data-src="{{ $urlToFile }}"> 
+                                                    <a href="{{ $urlToFile }}"  class="view-file-btn" data-src="{{ $urlToFile }}" style="color: black;"> 
 
                                                         {{ substr($media->name, 0, 20) }}
                                                     </a>
@@ -136,7 +136,7 @@
 
 
                     <li>
-                        <a href="#logout" onclick="$('#logout').submit();">
+                        <a href="#logout" onclick="$('#logout').submit();" style="color: black;">
                             <i class="fa fa-arrow-left"></i>
                             <span class="title">@lang('quickadmin.qa_logout')</span>
                         </a>

@@ -19,15 +19,15 @@ body {
 }
 
 .skin-blue .main-header .navbar {
-    background-color: #aaaaaa !important;
+    background-image: url('/images/h.jpg');
 }
 
 .skin-blue .main-header .logo {
-    background-color: #083559 !important;
+    background-color: #e6e6e6 !important;
 }
 
 .skin-blue .wrapper,
 .skin-blue .main-sidebar,
 .skin-blue .left-side {
-    background-color: #083559 !important;
+    background-color: #e6e6e6 !important;
 }

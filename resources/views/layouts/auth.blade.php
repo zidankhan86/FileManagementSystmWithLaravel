@@ -15,11 +15,13 @@
             justify-content: center;
         }
         .w-100{
-            width:100% !important;
+            width:105% !important;
         }
     </style>
 </head>
-
+        <!-- <div class="col-md-5">
+        <img src="{{ asset('/images/S.jpg') }}" alt="Image Description" style="width: 526px; height: 100px;">
+        </div> -->
 <body class="page-header-fixed">
 
 

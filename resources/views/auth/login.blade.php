@@ -3,8 +3,11 @@
 @section('content')
 
 <div class="row h-100 w-100" style="justify-content:center;display:flex; background-color: #e6e6e6;" id="login-box">
+
     <div class="col-md-5">
+        
         <div class="panel panel-default" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); background-color: #e6e6e6;">
+        
             <div class="panel-heading"></div>
             <div class="panel-body">
                 @if (count($errors) > 0)
