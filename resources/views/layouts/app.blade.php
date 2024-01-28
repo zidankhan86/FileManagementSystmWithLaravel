@@ -8,7 +8,8 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 
-<div id="wrapper">
+
+<div id="wrapper" class="">
 
 @include('partials.topbar')
 @include('partials.sidebar')

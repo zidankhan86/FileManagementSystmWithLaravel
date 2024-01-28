@@ -3,11 +3,10 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <ul class="sidebar-menu">
+{{--        <ul class="sidebar-menu">--}}
+        <ul class="nav">
 
             @if (Auth::check() && Auth::user()->role_id == 1)
-                 
-
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}" style="color: black;">
                 <a href="{{ url('/') }}" style="color: black;">
                     <i class="fa fa-wrench" style="color: black;"></i>
@@ -15,7 +14,7 @@
                 </a>
             </li>
 
-            
+
             <!-- @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -42,7 +41,7 @@
             </li>
             @endcan -->
             @can('user_access')
-                <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}" style="color: black;">
+                <li class="{{ $request->segment(2) == 'users' ? 'active' : '' }}; text-align-center" style="color: black; background-color: transparent; background: none!important;" >
                         <a href="{{ route('admin.users.index') }}" style="color: black;">
                             <i class="fa fa-user"></i>
                             <span class="title" style="color: black;">
@@ -52,18 +51,20 @@
                     </li>
                 @endcan
             @can('folder_access')
-            <li class="{{ $request->segment(2) == 'folders' ? 'active' : '' }}" style="color: black;">
+
+            <li class="{{ $request->segment(2) == 'folders' ? 'active' : '' }}; text-align-center" style="color: black; background-color: transparent">
                 <a href="{{ route('admin.folders.index') }}">
-                    <i class="fa fa-gears" class="title" style="color: black;"></i>
-                    <span class="title"style="color: black;">@lang('quickadmin.folders.title')</span>
+                    <i class="fa fa-gears" class="title" style="color: black"></i>
+                    <span class="title"  style="color: black">@lang('quickadmin.folders.title')</span>
                 </a>
             </li>
+
             @endcan
             
             @can('file_access')
-            <li class="{{ $request->segment(2) == 'files' ? 'active' : '' }}" style="color: black;">
+            <li class="{{ $request->segment(2) == 'files' ? 'active' : ''}}; text-align-center" style="color: black;background-color: transparent">
                 <a href="{{ route('admin.files.index') }}" style="color: black;">
-                    <i class="fa fa-gears" class="title" ></i>
+                    <i class="fa fa-file" class="title" ></i>
                     <span class="title" style="color: black;">@lang('quickadmin.files.title')</span>
                 </a>
             </li>
@@ -79,7 +80,7 @@
             @endcan --}}
 
 
-            <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}" style="color: black;">
+            <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}; text-align-center" style="color: black; background-color: transparent">
                 <a href="{{ route('auth.change_password') }}" style="color: black;">
                     <i class="fa fa-key"></i>
                     <span class="title" class="title" style="color: black;">@lang('quickadmin.qa_change_password')</span>
@@ -95,6 +96,8 @@
                 </a>
             </li>
         </ul>
+
     </section>
 </aside>
+
 

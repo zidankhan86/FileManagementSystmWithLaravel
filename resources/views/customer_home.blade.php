@@ -6,7 +6,6 @@
     <title>
         login
     </title>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -25,6 +24,8 @@
     <![endif]-->
 
     <link href="{{ url('adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ url('quickadmin/css') }}/select2.min.css" />
     <link href="{{ url('adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
     <link href="{{ url('adminlte/css/custom.css') }}" rel="stylesheet">
@@ -39,11 +40,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css" />
 </head>
 
+<body class="hold-transition skin-blue ">
 
-<body class="hold-transition skin-blue sidebar-mini">
+    <div id="wrapper" class="container">
 
-    <div id="wrapper">
-
+{{--        <header class="main-header">--}}
         <header class="main-header">
             <!-- Logo -->
             {{-- <a href="{{ url('/admin/home') }}" class="logo" style="font-size: 16px;">
@@ -53,30 +54,57 @@
                     @lang('quickadmin.quickadmin_title')</span>
             </a> --}}
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
+
+            <nav class="navbar navbar-left-top">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-
-
-
+                <a href="#" class="sidebar-toggle bg-blue " data-toggle="offcanvas" role="button"> </a>
+                    <span class="sr-only ">Toggle navigation</span>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p><p></p><p></p><p></p>
+                <p></p><p></p><p></p>
+                    <span class="icon-bar">
 
             </nav>
+
         </header>
-
-
 
         @inject('request', 'Illuminate\Http\Request')
         <!-- Left side column. contains the sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <ul class="sidebar-menu">
+
+                <ul class="navbar-custom-menu">
 
                     @if (Auth::check() && Auth::user()->role_id == 2)
                         <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
@@ -115,7 +143,7 @@
                                                         $urlToFile = asset('storage/' . $file->id . '/' . $media->file_name);
                                                     @endphp
                                                     {{-- <a href="{{ $urlToFile }}" class="btn btn-xs btn-success">View</a> --}}
-                                                    <a href="{{ $urlToFile }}"  class="view-file-btn" data-src="{{ $urlToFile }}" style="color: black;"> 
+                                                    <a href="{{ $urlToFile }}"  class="view-file-btn" data-src="{{ $urlToFile }}" style="color: black;">
 
                                                         {{ substr($media->name, 0, 20) }}
                                                     </a>
@@ -124,17 +152,12 @@
                                         </a>
                                     </li>
                                 @endforeach
-                                
+
                                     @endif
                                 </ul>
                             </li>
                         @endforeach
-
-
-
                     @endif
-
-
                     <li>
                         <a href="#logout" onclick="$('#logout').submit();" style="color: black;">
                             <i class="fa fa-arrow-left"></i>
@@ -144,8 +167,6 @@
                 </ul>
             </section>
         </aside>
-
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Main content -->
