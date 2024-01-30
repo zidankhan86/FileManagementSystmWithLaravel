@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+    <img class="p-2" style="height: 100px; width:2560px" src="{{asset('/images/login.jpg')}}" alt="">
 
 <div class="row h-100 w-100" style="justify-content:center;display:flex; background-color: #e6e6e6;" id="login-box">
 

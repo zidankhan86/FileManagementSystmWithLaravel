@@ -243,7 +243,6 @@
                         Home
                     </a>
                 </li>
-                </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="fa fa-sign-out pe-2"></i>
@@ -251,6 +250,26 @@
                     </a>
                 </li>
             </ul>
+{{--            dropdown system--}}
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
+                   aria-expanded="false" aria-controls="auth">
+                    <i class="fa-regular fa-user pe-2"></i>
+                    Auth
+                </a>
+                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                      <li class="sidebar-item">
+                          <a href="#" class="sidebar-link">Login</a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a href="#" class="sidebar-link">Register</a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a href="#" class="sidebar-link">Others</a>
+                      </li>
+                </ul>
+            </li>
+{{--            end dropdown system--}}
         </div>
     </aside>
     <!-- Main Component -->
@@ -260,7 +279,7 @@
             <button class="btn btn-white" type="button" data-bs-theme="light">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <img style="height: 40px; width:1900px" src="{{asset('/images/h.jpg')}}" alt="">
+            <img style="height: 40px; width:1900px" src="{{asset('/images/login.jpg')}}" alt="">
         </nav>
         <main class="content px-3 py-2">
             <div class="container-fluid">
