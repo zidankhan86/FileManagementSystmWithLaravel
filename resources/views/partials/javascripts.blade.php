@@ -23,6 +23,10 @@
 <script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
 <script src="{{ url('adminlte/js') }}/main.js"></script>
 
+{{--customer.blade.php--}}
+{{--<script src={{url ('adminlte/js/customer.js')}}></script>--}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ url('adminlte/plugins/fastclick/fastclick.js') }}"></script>
 <script src="{{ url('adminlte/js/app.min.js') }}"></script>

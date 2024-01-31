@@ -20,6 +20,7 @@ body {
 
 .skin-blue .main-header .navbar {
     background-image: url('/images/h.jpg');
+    flex: auto;
 }
 
 .skin-blue .main-header .logo {

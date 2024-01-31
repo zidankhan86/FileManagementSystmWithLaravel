@@ -190,7 +190,7 @@ a:focus {
  * ----------------------
  */
 .main-header {
-  position: relative;
+  position: absolute;
   max-height: 100px;
   z-index: 1030;
 }
@@ -602,7 +602,7 @@ a:focus {
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
-    width: 50px !important;
+    width: 60px !important;
     z-index: 850;
   }
   .sidebar-mini.sidebar-collapse .sidebar-menu > li {

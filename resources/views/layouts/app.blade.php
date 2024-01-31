@@ -9,7 +9,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 
-<div id="wrapper" class="">
+<div id="wrapper" class="container">
 
 @include('partials.topbar')
 @include('partials.sidebar')
