@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     @include('partials.head')
 </head>
 
-
 <body class="hold-transition skin-blue sidebar-mini">
 
+<div id="wrapper">
 
-<div id="wrapper" class="container">
+    @include('partials.topbar')
+    @include('partials.sidebar')
 
-@include('partials.topbar')
-@include('partials.sidebar')
 
-<!-- Content Wrapper. Contains page content -->
+
+
+
+
+
+    Expand Down
+
+
+
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
@@ -23,10 +30,8 @@
                     {{ $siteTitle }}
                 </h3>
             @endif
-
             <div class="row">
                 <div class="col-md-12">
-
                     @if (Session::has('message'))
                         <div class="alert alert-info">
                             <p>{{ Session::get('message') }}</p>
@@ -41,18 +46,14 @@
                             </ul>
                         </div>
                     @endif
-
                     @yield('content')
-
                 </div>
             </div>
         </section>
     </div>
-
-{!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
-<button type="submit">Logout</button>
+    {!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
+    <button type="submit">Logout</button>
 {!! Form::close() !!}
-
 @include('partials.javascripts')
 </body>
 </html>
