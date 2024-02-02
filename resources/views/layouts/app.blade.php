@@ -7,19 +7,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div id="wrapper">
-
     @include('partials.topbar')
     @include('partials.sidebar')
-
-
-
-
-
-
-
-    Expand Down
-
-
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
