@@ -135,7 +135,9 @@ class UsersController extends Controller
             $request->merge(['image' => 'images/'.$imageName]);
     
             // Delete the previous image if it exists
-            Storage::delete($user->image);
+            if ($user->image) {
+                Storage::delete('public/'.$user->image);
+            }
         }
     
         $user->update([
